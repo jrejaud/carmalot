@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/car_list_item_height"
+    android:paddingLeft="@dimen/fab_margin"
+    android:paddingTop="@dimen/fab_margin"
+    android:paddingBottom="@dimen/fab_margin"
+    android:paddingRight="@dimen/fab_margin"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/make_image"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_vw"
+        android:layout_width="@dimen/car_logo_size"
+        android:layout_height="@dimen/car_logo_size" />
+
+    <LinearLayout
+        android:paddingLeft="@dimen/fab_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:id="@+id/make_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Volkswagon"/>
+
+        <TextView
+            android:textSize="20dp"
+            android:id="@+id/model_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Golf"/>
+
+        <TextView
+            android:textSize="16dp"
+            android:id="@+id/model_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2012"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>
