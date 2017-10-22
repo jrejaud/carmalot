@@ -16,7 +16,7 @@ public class CarLotInitialDataTransaction implements Realm.Transaction {
         realm.insertOrUpdate(car);
         car = new Car(CarMake.LEXUS, "LE", 2006);
         realm.insertOrUpdate(car);
-        car = new Car(CarMake.FORD, "Mustand", 1968);
+        car = new Car(CarMake.FORD, "Mustang", 1968);
         realm.insertOrUpdate(car);
         car = new Car(CarMake.TESLA, "X", 2016);
         realm.insertOrUpdate(car);

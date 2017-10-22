@@ -1,6 +1,8 @@
 package com.jrejaud.carlot;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +20,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.jrejaud.carlot.adapter.CarAdapter;
@@ -40,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        realm = Realm.getInstance(config);
 
         // Get a Realm instance for this thread
-        realm = Realm.getInstance(config);
-        carAdapter = new CarAdapter(this, realm.where(Car.class).findAll());
+        carAdapter = new CarAdapter(this, realm, realm.where(Car.class).findAll());
         ListView carlist = (ListView) findViewById(R.id.car_list);
         carlist.setAdapter(carAdapter);
 
@@ -54,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
         //Create New Car
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_car);
         fab.setOnClickListener(addCarButton);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        realm.close();
     }
 
     private RealmConfiguration config = new RealmConfiguration.Builder()
@@ -130,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                                     realm.insert(car);
                                     carAdapter.notifyDataSetChanged();
                                     //Dismiss once everything is OK.
+                                    Toast.makeText(MainActivity.this, "New "+car.getMake()+" "+car.getModel()+" "+car.getYear()+" created.", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
                             });
@@ -140,6 +156,36 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
         }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        //Don't use intents, but rather directly read the text changes on the fly and apply a filter
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                carAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
+        return true;
+    }
 
     //Delete a car
     private AdapterView.OnItemClickListener carListOnItemClick = new AdapterView.OnItemClickListener() {

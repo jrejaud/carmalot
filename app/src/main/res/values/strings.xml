@@ -13,4 +13,6 @@
     <string name="error_date">Car year must be between</string>
     <string name="error_model">Please enter a model name</string>
     <string name="error_make">Please enter a valid make</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Vehicle Search</string>
 </resources>
