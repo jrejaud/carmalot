@@ -18,10 +18,13 @@ public class Car extends RealmObject{
     private String model;
     private int year;
 
+    public final static int MIN_YEAR = 1940;
+    public final static int MAX_YEAR = 2018;
+
     public Car() {
     }
 
-    public Car(@CarMake String make, String model, @IntRange(from=1940, to=2018) int year) {
+    public Car(@CarMake.Make String make, String model, @IntRange(from=MIN_YEAR, to=MAX_YEAR) int year) {
         this.make = make;
         this.model = model;
         this.year = year;
@@ -35,25 +38,9 @@ public class Car extends RealmObject{
         return model;
     }
 
-    @IntRange(from=1990, to=2018)
+    @IntRange(from=MIN_YEAR, to=MAX_YEAR)
     public int getYear() {
         return year;
     }
-
-    @Retention(SOURCE)
-    @StringDef({
-            TOYOTA,
-            LEXUS,
-            FORD,
-            TESLA,
-            VW
-    })
-    public @interface CarMake {}
-    public static final String TOYOTA = "Toyota";
-    public static final String LEXUS = "Lexus";
-    public static final String TESLA = "Tesla";
-    public static final String VW = "Volkswagen";
-    public static final String FORD = "Ford";
-
 
 }

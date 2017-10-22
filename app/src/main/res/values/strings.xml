@@ -5,4 +5,12 @@
     <string name="delete_message">Are you sure you want to delete</string>
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
+    <string name="vehicle_model">Model</string>
+    <string name="vehicle_year">Year</string>
+    <string name="vehicle_make">Make</string>
+    <string name="create">Create</string>
+    <string name="create_new_car">Create New Car</string>
+    <string name="error_date">Car year must be between</string>
+    <string name="error_model">Please enter a model name</string>
+    <string name="error_make">Please enter a valid make</string>
 </resources>

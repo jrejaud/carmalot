@@ -1,5 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="car_logo_size">75dp</dimen>
-    <dimen name="car_list_item_height">125dp</dimen>
+    <dimen name="car_list_item_height">100dp</dimen>
+    <dimen name="list_item_top_padding">8dp</dimen>
 </resources>

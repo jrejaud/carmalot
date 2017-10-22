@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jrejaud.carlot.R;
 import com.jrejaud.carlot.model.Car;
+import com.jrejaud.carlot.model.CarMake;
 
 import java.util.List;
 
@@ -48,19 +49,19 @@ public class CarAdapter extends RealmBaseAdapter<Car> implements ListAdapter {
 
             //TODO Can use reflection for this too
             switch (car.getMake()) {
-                case Car.FORD:
+                case CarMake.FORD:
                     makeImageView.setImageResource(R.drawable.ic_ford);
                     break;
-                case Car.LEXUS:
+                case CarMake.LEXUS:
                     makeImageView.setImageResource(R.drawable.ic_lexus);
                     break;
-                case Car.TESLA:
+                case CarMake.TESLA:
                     makeImageView.setImageResource(R.drawable.ic_tesla);
                     break;
-                case Car.TOYOTA:
+                case CarMake.TOYOTA:
                     makeImageView.setImageResource(R.drawable.ic_toyota);
                     break;
-                case Car.VW:
+                case CarMake.VW:
                     makeImageView.setImageResource(R.drawable.ic_vw);
                     break;
 
