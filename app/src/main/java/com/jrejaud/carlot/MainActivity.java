@@ -33,11 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Get a Realm instance for this thread
         realm = Realm.getInstance(config);
-
         carAdapter = new CarAdapter(this, realm.where(Car.class).findAll());
-
         ListView carlist = (ListView) findViewById(R.id.car_list);
         carlist.setAdapter(carAdapter);
+
         //On item click, delete the car
         carlist.setOnItemClickListener(carListOnItemClick);
 
@@ -51,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
             .initialData(new CarLotInitialDataTransaction())
             .build();
 
+    //Create a new car
     private View.OnClickListener addCarButton = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             //Create new car
+
             final Car car = new Car(Car.TOYOTA, "da", 1975);
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //Delete a car
     private AdapterView.OnItemClickListener carListOnItemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
