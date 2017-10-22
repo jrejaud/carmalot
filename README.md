@@ -1,4 +1,4 @@
-# carmalot
+# Carmalot
 
 Simple Car Tracking App
 - Users can Create, Read, and Delete cars in the lot.
